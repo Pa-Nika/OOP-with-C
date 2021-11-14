@@ -155,6 +155,7 @@ TEST (SeventhTest, Test) {
     //test for Trit operator[] (...)
     const auto c = setA;
     ASSERT_EQ (c[0], False);
+    ASSERT_EQ (c.capacity(), setA.capacity());
 
     //test for move constructor
     TritSet setB = func(setA);
