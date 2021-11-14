@@ -285,14 +285,13 @@ TritSet::Iterator::Iterator(TritSet* my_set, size_t index) {
 TritSet::Iterator TritSet::Iterator::operator++() {
     this->index_iterator ++;
 
-    return TritSet::Iterator(this->set_iterator, index_iterator);
+    return TritSet::Iterator(this->set_iterator, index_iterator - 1);
 }
 
 TritSet::Iterator TritSet::Iterator::operator--() {
-    auto temp_iterator = &this->set_iterator[index_iterator];
     this->index_iterator --;
 
-    return TritSet::Iterator(temp_iterator, index_iterator);
+    return TritSet::Iterator(this->set_iterator , index_iterator + 1);
 }
 
 bool TritSet::Iterator::operator==(const TritSet::Iterator &it) const {
