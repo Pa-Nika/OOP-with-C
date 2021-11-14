@@ -101,3 +101,62 @@ TEST (FourthTest, AdditionalMetgods) {
     setA[10000] = Unknown;
     ASSERT_EQ (setA.length(), 1000 + 1);
 }
+
+TEST (FifthTest, SetOperations) {
+
+    TritSet A(100);
+    for (int i = 0; i < 100; i++) {
+        A[i] = True;
+    }
+
+    TritSet B(200);
+    for (int i = 0; i < 200; i++) {
+        B[i] = False;
+    }
+
+    TritSet C = A & B;
+    ASSERT_EQ (C.cardinality(False), 200);
+    ASSERT_EQ (C.capacity(), B.capacity());
+
+
+    for (int i = 10; i < 200; i++) {
+        C[i] = True;
+    }
+
+    TritSet D = ~C;
+    ASSERT_EQ (D.cardinality(False), 190);
+
+    TritSet E = C | B;
+    ASSERT_EQ (E.cardinality(False), 10);
+}
+
+TEST (SixthTest, IteratorTest) {
+    TritSet setA(100);
+
+    for(auto it1 : setA){
+        it1 = True;
+    }
+
+    for (auto it1 : setA) {
+        ASSERT_EQ (it1, True);
+    }
+    ASSERT_EQ (setA[0], True);
+    ASSERT_EQ (setA[99], True);
+}
+
+TritSet func(TritSet my_trit) {
+
+    return my_trit;
+}
+
+TEST (SeventhTest, Test) {
+    TritSet setA(100);
+    setA[0] = False;
+    //test for Trit operator[] (...)
+    const auto c = setA;
+    ASSERT_EQ (c[0], False);
+
+    //test for move constructor
+    TritSet setB = func(setA);
+    ASSERT_EQ (setA.capacity(), setB.capacity());
+}
