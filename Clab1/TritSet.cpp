@@ -70,18 +70,18 @@ uint TritSet::sizeUint(const size_t size) {
 void TritSet::changeSize(size_t new_size_trit) {
     this->size = new_size_trit;
     uint now_size = sizeUint(new_size_trit);
-    uint* time_set;
+    uint* temp_set;
 
     if (this->basic_size != EMPTY_MEMORY)
-        time_set = new uint[now_size + ADDITIONAL_MEMORY];
+        temp_set = new uint[now_size + ADDITIONAL_MEMORY];
     else
-        time_set = nullptr;
+        temp_set = nullptr;
 
-    memset (time_set, 0u, now_size + ADDITIONAL_MEMORY);
-    memmove (time_set, this->set, this->basic_size * sizeof(uint));
+    memset (temp_set, 0u, now_size + ADDITIONAL_MEMORY);
+    memmove (temp_set, this->set, this->basic_size * sizeof(uint));
 
     delete [] this->set;
-    this->set = time_set;
+    this->set = temp_set;
     this->basic_size = sizeUint(new_size_trit) + ADDITIONAL_MEMORY;
 }
 
@@ -142,17 +142,17 @@ void TritSet::shrink() {
     this->basic_size = sizeUint(this->first_install_size);
     this->size = this->first_install_size;
 
-    uint *time_set;
+    uint *temp_set;
 
     if (this->basic_size != EMPTY_MEMORY)
-        time_set = new uint[this->basic_size];
+        temp_set = new uint[this->basic_size];
     else {
-        time_set = nullptr;
+        temp_set = nullptr;
     }
-    memset(time_set, 0u, this->basic_size);
-    memmove(time_set, this->set, this->basic_size * sizeof(uint));
+    memset(temp_set, 0u, this->basic_size);
+    memmove(temp_set, this->set, this->basic_size * sizeof(uint));
     delete[] this->set;
-    this->set = time_set;
+    this->set = temp_set;
 }
 
 TritSet::Proxy TritSet::operator[](size_t index) {
