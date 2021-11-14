@@ -39,6 +39,24 @@ private:
     };
 
 public:
+    
+    class Iterator {
+    private:
+        TritSet* set_iterator;
+        size_t index_iterator;
+    public:
+        explicit Iterator(TritSet* my_set, size_t index);
+        Iterator operator++ ();
+        Iterator operator-- ();
+        bool operator== (const Iterator& it) const;
+        bool operator!= (const Iterator& it) const;
+
+        Proxy operator* (); //dereference
+    };
+
+    Iterator begin();
+    Iterator end();
+    
     [[nodiscard]] size_t capacity() const;
     [[nodiscard]] uint getCountFalse () const;
     [[nodiscard]] uint getCountTrue () const;
