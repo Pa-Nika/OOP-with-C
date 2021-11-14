@@ -153,7 +153,7 @@ TEST (SeventhTest, Test) {
     TritSet setA(100);
     setA[0] = False;
     //test for Trit operator[] (...)
-    const auto c = setA;
+    const TritSet c = setA;
     ASSERT_EQ (c[0], False);
     ASSERT_EQ (c.capacity(), setA.capacity());
 
