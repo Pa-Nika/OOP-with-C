@@ -258,3 +258,57 @@ TritSet::Proxy &TritSet::Proxy::operator=(const TritSet::Proxy &new_trit) {
     this->set_proxy->countTrit(new_trit.trit_proxy, index_proxy);
     return *this;
 }
+
+Trit TritSet::operator[](size_t index) const {
+    uint set_byte = index * COUNT_TRIT_IN_BIT / BYTE_IN_UINT;
+
+    size_t index_bit = BYTE_IN_UINT - ((index * COUNT_TRIT_IN_BIT) % BYTE_IN_UINT) - COUNT_TRIT_IN_BIT;
+    uint first_bit = this->set[set_byte] & ((uint)1 << index_bit);
+    uint second_bit = this->set[set_byte] & ((uint)1 << (index_bit + 1));
+
+    return Trit((first_bit + second_bit) >> index_bit);
+}
+
+TritSet::Iterator TritSet::begin() {
+    return TritSet::Iterator(this, 0);
+}
+
+TritSet::Iterator TritSet::end() {
+    return TritSet::Iterator(this, this->size);
+}
+
+TritSet::Iterator::Iterator(TritSet* my_set, size_t index) {
+    this->set_iterator = my_set;
+    this->index_iterator = index;
+}
+
+TritSet::Iterator TritSet::Iterator::operator++() {
+    this->index_iterator ++;
+
+    return TritSet::Iterator(this->set_iterator, index_iterator);
+}
+
+TritSet::Iterator TritSet::Iterator::operator--() {
+    auto temp_iterator = &this->set_iterator[index_iterator];
+    this->index_iterator --;
+
+    return TritSet::Iterator(temp_iterator, index_iterator);
+}
+
+bool TritSet::Iterator::operator==(const TritSet::Iterator &it) const {
+    if (this->set_iterator == it.set_iterator && this->index_iterator == it.index_iterator)
+        return true;
+
+    return false;
+}
+
+bool TritSet::Iterator::operator!=(const TritSet::Iterator &it) const {
+    if (*this == it)
+        return false;
+
+    return true;
+}
+
+TritSet::Proxy TritSet::Iterator::operator*() {
+    return (*this->set_iterator)[index_iterator];
+}
