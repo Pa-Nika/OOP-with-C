@@ -33,13 +33,14 @@ private:
         Trit trit_proxy;                                //remembers which Trit summoned it
     public:
         Proxy(size_t index, TritSet* set);
-        operator Trit () const;
         Trit operator= (Trit value);
+        operator Trit() const;
+
         Proxy& operator= (const Proxy& new_trit);
     };
 
 public:
-    
+
     class Iterator {
     private:
         TritSet* set_iterator;
@@ -56,7 +57,7 @@ public:
 
     Iterator begin();
     Iterator end();
-    
+
     [[nodiscard]] size_t capacity() const;
     [[nodiscard]] uint getCountFalse () const;
     [[nodiscard]] uint getCountTrue () const;
@@ -68,6 +69,7 @@ public:
     [[nodiscard]] std::unordered_map< Trit, int, std::hash<int> > cardinality() const;
 
     Proxy operator[] (size_t index);
+    Trit operator[] (size_t index) const;
     TritSet operator& (TritSet& new_trit);
     TritSet operator| (TritSet& new_trit);
     TritSet operator~ ();
