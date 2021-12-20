@@ -1,13 +1,11 @@
 #include "DumpFile.h"
 
 void DumpFile::setArgs(const std::list<std::string> &block_data) {
-    short count_args = START_POSITION;
     for (const auto & i : block_data) {
-        count_args++;
         data.push_back(i);
     }
 
-    if (data[0] != "dump" || count_args  > COUNT_ARGS) {
+    if (data[0] != "dump" || data.size() > COUNT_ARGS) {
         throw WorkerException("Bab order for dump");
     }
     else
@@ -15,6 +13,10 @@ void DumpFile::setArgs(const std::list<std::string> &block_data) {
 }
 
 std::list<std::string>& DumpFile::work(std::list<std::string> &answer_data) {
+    if (answer_data.empty()) {
+        throw WorkerException ("The \"dump\" block has not received data from another block");
+    }
+
     fout.open(file_name);
 
     if (!fout.is_open()) {

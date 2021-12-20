@@ -1,13 +1,11 @@
 #include "ReplaceFile.h"
 
 void ReplaceFile::setArgs(const std::list<std::string> &block_data) {
-    short count_args = START_POSITION;
     for (const auto & i : block_data) {
-        count_args++;
         data.push_back(i);
     }
 
-    if (data[0] != "replace" || count_args > BIG_COUNT_ARGS) {
+    if (data[0] != "replace" || data.size() > BIG_COUNT_ARGS) {
         throw WorkerException("Bad order for replace command");
     }
     else {
@@ -18,6 +16,10 @@ void ReplaceFile::setArgs(const std::list<std::string> &block_data) {
 }
 
 std::list<std::string>& ReplaceFile::work(std::list<std::string> &answer_data) {
+    if (answer_data.empty()) {
+        throw WorkerException ("The \"replace\" block has not received data from another block");
+    }
+
     for (auto it = answer_data.begin(); it != answer_data.end(); ++it) {
         if ((*it).find(word1) != std::string::npos) {
             //walk along the line that contains word1
