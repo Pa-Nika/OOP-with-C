@@ -81,10 +81,6 @@ void WorkflowExecutor::callParser() {
 }
 
 void WorkflowExecutor::callBlocks(std::list<std::string>& answer_data) {
-//    for (auto& it : order_worker) {
-//        answer_data = it->work(answer_data);
-//    }
-
     Text my_text(answer_data);
     for (auto& it : order_worker) {
         my_text = it->work(my_text);
