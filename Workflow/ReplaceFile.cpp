@@ -15,12 +15,14 @@ void ReplaceFile::setArgs(const std::list<std::string> &block_data) {
 
 }
 
-std::list<std::string>& ReplaceFile::work(std::list<std::string> &answer_data) {
-    if (answer_data.empty()) {
+Text &ReplaceFile::work(Text & answer_data) {
+    if (!answer_data.getStatus()) {
         throw WorkerException ("The \"replace\" block has not received data from another block");
     }
 
-    for (auto it = answer_data.begin(); it != answer_data.end(); ++it) {
+    std::list<std::string> my_text = answer_data.getText();
+
+    for (auto it = my_text.begin(); it != my_text.end(); ++it) {
         if ((*it).find(word1) != std::string::npos) {
             //walk along the line that contains word1
             std::string str;
@@ -39,5 +41,7 @@ std::list<std::string>& ReplaceFile::work(std::list<std::string> &answer_data) {
             }
         }
     }
+    answer_data.setText(my_text);
+
     return answer_data;
 }

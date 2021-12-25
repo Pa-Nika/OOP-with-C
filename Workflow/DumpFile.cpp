@@ -12,8 +12,8 @@ void DumpFile::setArgs(const std::list<std::string> &block_data) {
         file_name = data[NAME_POSITION];
 }
 
-std::list<std::string>& DumpFile::work(std::list<std::string> &answer_data) {
-    if (answer_data.empty()) {
+Text &DumpFile::work(Text &answer_data) {
+    if (!answer_data.getStatus()) {
         throw WorkerException ("The \"dump\" block has not received data from another block");
     }
 
@@ -23,7 +23,7 @@ std::list<std::string>& DumpFile::work(std::list<std::string> &answer_data) {
         throw WorkerException("Can't open file for dump");
     }
 
-    for (auto & it : answer_data) {
+    for (auto & it : answer_data.getText()) {
         fout << it << std::endl;
     }
 

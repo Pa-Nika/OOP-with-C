@@ -6,16 +6,19 @@ void SortFile::setArgs(const std::list<std::string> &block_data) {
     }
 
     if (data[0] != "sort" || data.size() > WITHOUT_ARGS) {
-        throw WorkerException("Dad order for sort");
+        throw WorkerException("Bad order for sort");
     }
 }
 
-std::list<std::string>& SortFile::work(std::list<std::string> & answer_data) {
-    if (answer_data.empty()) {
+Text &SortFile::work(Text & answer_data) {
+    if (!answer_data.getStatus()) {
         throw WorkerException ("The \"sort\" block has not received data from another block");
     }
 
+    std::list<std::string> my_text = answer_data.getText();
     Comparator sort;
-    answer_data.sort(sort);
+    my_text.sort(sort);
+    answer_data.setText(my_text);
+
     return  answer_data;
 }

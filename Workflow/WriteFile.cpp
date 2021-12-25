@@ -12,8 +12,8 @@ void WriteFile::setArgs(const std::list<std::string> &block_data) {
         file_name = data[NAME_POSITION];
 }
 
-std::list<std::string>& WriteFile::work(std::list<std::string> & answer_data) {
-    if (answer_data.empty()) {
+Text &WriteFile::work(Text & answer_data) {
+    if (!answer_data.getStatus()) {
         throw WorkerException ("The \"write\" block has not received data from another block");
     }
 
@@ -22,11 +22,11 @@ std::list<std::string>& WriteFile::work(std::list<std::string> & answer_data) {
         throw WorkerException("can't open file for writefile");
     }
 
-    for (auto & it : answer_data) {
+    for (auto & it : answer_data.getText()) {
         fout << it << std::endl;
     }
 
-    answer_data.clear();
+    answer_data.setStatus(false);
     return answer_data;
 }
 

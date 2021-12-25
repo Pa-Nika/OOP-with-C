@@ -12,15 +12,19 @@ void GrepFile::setArgs(const std::list<std::string> &block_data) {
         word = data[NAME_POSITION];
 }
 
-std::list<std::string>& GrepFile::work(std::list<std::string> &answer_data) {
-    if (answer_data.empty()) {
+Text &GrepFile::work(Text & answer_data) {
+    if (!answer_data.getStatus()) {
         throw WorkerException ("The \"grep\" block has not received data from another block");
     }
 
-    for (auto it = answer_data.begin(); it != answer_data.end(); ++it) {
+    std::list<std::string> my_text = answer_data.getText();
+
+    for (auto it = my_text.begin(); it != my_text.end(); ++it) {
         if ((*it).find(word) != std::string::npos) {
-            answer_data.erase(it);
+            my_text.erase(it);
         }
     }
+    answer_data.setText(my_text);
+
     return answer_data;
 }

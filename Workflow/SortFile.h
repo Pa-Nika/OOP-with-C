@@ -14,7 +14,7 @@ private:
 
 public:
     void setArgs (const std::list<std::string>& block_data) override;
-    std::list<std::string>& work(std::list<std::string>&) override;
+    Text& work (Text&) override;
 };
 
 #endif //WORKFLOW_SORTFILE_H

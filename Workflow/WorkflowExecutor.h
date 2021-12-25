@@ -4,6 +4,7 @@
 #include "ParsConfigFile.h"
 #include "BlocksFactory.h"
 #include "WorkflowException.h"
+#include "Text.h"
 
 class WorkflowExecutor {
 private:

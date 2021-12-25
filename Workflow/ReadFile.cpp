@@ -12,21 +12,27 @@ void ReadFile::setArgs(const std::list<std::string>& block_data) {
         file_name = data[NAME_POSITION];
 }
 
-std::list<std::string>& ReadFile::work(std::list<std::string>& answer_data) {
-    if (!answer_data.empty()) {
+Text &ReadFile::work(Text & answer_data) {
+
+    if (answer_data.getStatus()) {
         throw WorkerException ("The \"read\" block has received data from another block");
     }
+
+    answer_data.setStatus(true);
 
     fin.open(file_name);
     if (!fin.is_open()) {
         throw WorkerException ("Can't open file for read");
     }
 
+    std::list<std::string> my_text;
+
     while (!fin.eof()) {
         std::string str;
         getline(fin, str);
-        answer_data.push_back(str);
+        my_text.push_back(str);
     }
+    answer_data.setText(my_text);
 
     return answer_data;
 }
@@ -34,7 +40,3 @@ std::list<std::string>& ReadFile::work(std::list<std::string>& answer_data) {
 ReadFile::~ReadFile() {
     fin.close();
 }
-
-
-
-
