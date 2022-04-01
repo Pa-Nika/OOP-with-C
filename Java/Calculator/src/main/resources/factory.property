@@ -1,0 +1,10 @@
+PUSH=Operations.PUSH
+DEFINE=Operations.DEFINE
+/=Operations.Div
+-=Operations.Sub
+*=Operations.Mul
++=Operations.Plus
+POP=Operations.POP
+PRINT=Operations.PRINT
+SQRT=Operations.SQRT
+-=Operations.Sub

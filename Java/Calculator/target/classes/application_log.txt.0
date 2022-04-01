@@ -1,0 +1,10 @@
+мар. 19, 2022 12:25:27 AM Operations.PUSH work
+INFO: Push 1
+мар. 19, 2022 12:25:27 AM Operations.PUSH work
+INFO: Push 1
+мар. 19, 2022 12:25:27 AM Operations.Plus work
+INFO: 1.0 + 1.0
+мар. 19, 2022 12:25:27 AM Operations.PRINT work
+INFO: Print 2.0
+мар. 19, 2022 12:25:27 AM Factory.Calculator FillProperty
+SEVERE: Exception: undefined operation VDV
