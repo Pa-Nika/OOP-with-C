@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="600.0" prefWidth="900.0" style="-fx-border-color: #592680; -fx-border-radius: 0; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.panova.lab5.chat.client.entranceWindow.ControllerEntranceWindow">
+   <children>
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="303.0" prefWidth="900.0" style="-fx-background-color: #A668D5;">
+         <children>
+            <TextField fx:id="textFieldWithLogin" layoutX="335.0" layoutY="239.0" onAction="#enterName" prefHeight="22.0" prefWidth="229.0" promptText="Name" />
+            <Text layoutX="279.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your name to join the chat">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="errorText" layoutX="351.0" layoutY="287.0" opacity="0.7" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="Perpetua" size="15.0" />
+               </font></Text>
+            <AnchorPane prefHeight="75.0" prefWidth="903.0" style="-fx-background-color: #592680;">
+               <children>
+                  <Label layoutX="384.0" layoutY="18.0" text="POSTMAN">
+                     <font>
+                        <Font name="Perpetua Bold" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="583.0" prefWidth="900.0" style="-fx-background-color: #A668D5;">
+         <children>
+            <Button layoutX="390.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#clickInButtonConnect" text="Connect">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

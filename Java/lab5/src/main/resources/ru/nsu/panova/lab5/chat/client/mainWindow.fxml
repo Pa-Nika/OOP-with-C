@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.panova.lab5.chat.client.mainWindow.ControllerMainWindow">
+  <children>
+    <SplitPane dividerPositions="0.7281834372217275" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <items>
+      <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="546.0" prefWidth="651.0" style="-fx-background-color: #C79CE8;">
+               <children>
+                  <VBox alignment="BOTTOM_LEFT" layoutX="2.0" layoutY="23.0" prefHeight="551.0" prefWidth="647.0" spacing="10.0">
+                     <children>
+                        <TextArea fx:id="chatTextArea" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="648.0" scrollTop="50.0" wrapText="true">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </TextArea>
+                        <Pane prefHeight="110.0" prefWidth="648.0">
+                           <children>
+                              <Button fx:id="buttonSend" layoutX="527.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#sendMassage" prefHeight="38.0" prefWidth="108.0" text="send">
+                                 <font>
+                                    <Font name="Perpetua" size="18.0" />
+                                 </font>
+                              </Button>
+                              <TextField fx:id="messageTextField" layoutX="44.0" layoutY="37.0" onAction="#enterMessage" prefHeight="25.0" prefWidth="460.0" promptText="Message" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+               </children>
+      </AnchorPane>
+        <AnchorPane style="-fx-background-color: #C79CE8;">
+          <children>
+            <Label alignment="CENTER" layoutX="91.0" layoutY="14.0" style="&#10;" text="Members" textAlignment="CENTER" wrapText="false">
+                     <font>
+                <Font name="Perpetua" size="18.0" fx:id="x1" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="membersTextArea" editable="false" layoutX="6.0" layoutY="36.0" mouseTransparent="true" prefHeight="510.0" prefWidth="232.0">
+                     <font>
+                        <Font name="Perpetua" size="18.0" />
+                     </font></TextArea>
+          </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+  </children>
+</VBox>
