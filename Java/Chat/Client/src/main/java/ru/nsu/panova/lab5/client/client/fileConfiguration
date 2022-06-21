@@ -5,3 +5,4 @@ logout ru.nsu.panova.lab5.client.client.mainWindow.communicatingWithServer.Comma
 userLogin ru.nsu.panova.lab5.client.client.mainWindow.communicatingWithServer.Command.UserLogin
 userLogout ru.nsu.panova.lab5.client.client.mainWindow.communicatingWithServer.Command.UserLogout
 answer ru.nsu.panova.lab5.client.client.mainWindow.communicatingWithServer.Command.Answer
+bufferMessages ru.nsu.panova.lab5.client.client.mainWindow.communicatingWithServer.Command.BufferMessages

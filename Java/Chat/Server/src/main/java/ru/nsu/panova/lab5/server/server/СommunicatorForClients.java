@@ -13,6 +13,7 @@ public class СommunicatorForClients extends Thread {
     private boolean active = true;
     private String userName;
 
+
     public void setActiveFalse() {
         this.active = false;
     }
@@ -27,6 +28,7 @@ public class СommunicatorForClients extends Thread {
         start();
     }
 
+    ////////////////////////////////////////////////////////////
 
     @Override
     public void run() {
@@ -57,8 +59,10 @@ public class СommunicatorForClients extends Thread {
     public void sendAll(CommandInterface command) {
         Gson gson = new Gson();
         String json = gson.toJson(command);
+
         for (СommunicatorForClients vr : Server.serverList) {
             vr.send(json);
+
         }
     }
 

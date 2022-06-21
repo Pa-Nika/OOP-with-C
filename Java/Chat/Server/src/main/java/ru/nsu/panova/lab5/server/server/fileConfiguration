@@ -5,3 +5,4 @@ logout ru.nsu.panova.lab5.server.server.Command.Logout
 userLogin ru.nsu.panova.lab5.server.server.Command.UserLogin
 userLogout ru.nsu.panova.lab5.server.server.Command.UserLogout
 answer ru.nsu.panova.lab5.server.server.Command.Answer
+bufferMessages ru.nsu.panova.lab5.server.server.Command.BufferMessages

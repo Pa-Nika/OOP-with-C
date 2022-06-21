@@ -2,7 +2,7 @@ package ru.nsu.panova.lab5.server.server.Command;
 
 
 import ru.nsu.panova.lab5.server.server.Constants;
-import ru.nsu.panova.lab5.server.server.Exeption.FabricExceptions;
+import ru.nsu.panova.lab5.server.server.Exeption.FactoryExceptions;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class FactoryServerCommand {
     private Map<String, CommandInterface> commandMap = new HashMap<>();
 
-    public void configurateFabric() throws FabricExceptions {
+    public void configurateFactory() throws FactoryExceptions {
         try (BufferedReader reader = new BufferedReader(new FileReader(Constants.FABRIC_CONFIGURATION_FILE_NAME))){
             Pattern pattern = Pattern.compile(Constants.REGEX_FOR_CONFIGURATION_FABRIC);
             String str = reader.readLine();
@@ -29,15 +29,15 @@ public class FactoryServerCommand {
                         commandMap.put(workerKey, worker);
                         str = reader.readLine();
                     } else {
-                        throw (new FabricExceptions(Constants.EXCEPTION_FABRIC_CONFIGURATION_FILE));
+                        throw (new FactoryExceptions(Constants.EXCEPTION_FABRIC_CONFIGURATION_FILE));
                     }
                 } else {
-                    throw (new FabricExceptions(Constants.EXCEPTION_FABRIC_CONFIGURATION_FILE));
+                    throw (new FactoryExceptions(Constants.EXCEPTION_FABRIC_CONFIGURATION_FILE));
                 }
             }
         } catch (Throwable e) {
             e.printStackTrace();
-            throw (new FabricExceptions(Constants.EXCEPTION_FABRIC_CONFIGURATION_FILE));
+            throw (new FactoryExceptions(Constants.EXCEPTION_FABRIC_CONFIGURATION_FILE));
         }
     }
 

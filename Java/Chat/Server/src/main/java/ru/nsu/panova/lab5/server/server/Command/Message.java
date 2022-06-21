@@ -19,19 +19,6 @@ public class Message extends CommandGetterType {
         this.userName = name;
     }
 
-//    public String getNameSender() {
-//        return userName;
-//    }
-//
-//    public long getTimeSend() {
-//        return timeSend;
-//    }
-//
-//    public String getMessage() {
-//        return message;
-//    }
-
-
     @Override
     public void runCommand(CommandExecutor commandExecutor, String json) {
         Gson gson = new Gson();

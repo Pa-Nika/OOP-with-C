@@ -10,7 +10,9 @@ public class Constants {
     public static final String COMMAND_LOGIN = "login";
     public static final String COMMAND_LOGOUT = "logout";
     public static final String COMMAND_LIST_USERS = "listUsers";
+    public static final String COMMAND_FIRST_MESSAGES = "bufferMessages";
     public static final String COMMAND_USER_LOGIN = "userLogin";
     public static final String COMMAND_USER_LOGOUT = "userLogout";
     public static final String COMMAND_ANSWER = "answer";
+    public static final int BUFFER_SIZE = 10;
 }

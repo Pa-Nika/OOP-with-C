@@ -22,16 +22,17 @@ public class ModelMainWindow extends ObservableChat {
     private Socket clientSocket;
     private WriteMsg writeMsg;
     private ReadMsg readMsg;
-    private final FactoryClientCommand fabricCommand = new FactoryClientCommand();
+    private final FactoryClientCommand factoryCommand = new FactoryClientCommand();
     private String nameUser;
     private List<String> listAllUsers = new ArrayList<>();
+    private List<Message> listFirstMessages = new ArrayList<>();
 
     public void setClientSocketAndUserName(Socket clientSocket, String nameUser) {
         this.clientSocket = clientSocket;
         this.nameUser = nameUser;
         writeMsg = new WriteMsg(clientSocket, this);
         try {
-            fabricCommand.configureFabric();
+            factoryCommand.configureFactory();
         } catch (FactoryExceptions e) {
             System.out.println(e.getMessage());
         }
@@ -40,6 +41,7 @@ public class ModelMainWindow extends ObservableChat {
 
         login();
         sendRequest();
+        sendMessagesRequest();
     }
 
     public void sendMsg(String textMsg) {
@@ -50,7 +52,7 @@ public class ModelMainWindow extends ObservableChat {
 
     public void jsonAdapter(String json) {
         Gson gson = new Gson();
-        fabricCommand.getCommand(gson.fromJson(json, CommandReader.class).getTypeCommand()).runCommand(this, json);
+        factoryCommand.getCommand(gson.fromJson(json, CommandReader.class).getTypeCommand()).runCommand(this, json);
     }
 
     public void login() {
@@ -68,7 +70,8 @@ public class ModelMainWindow extends ObservableChat {
 
     public void addAMassageToChat(Message msg) {
         Date date = new Date(msg.getTimeSend());
-        String dateStr = String.valueOf(date.getDate() + "." + (date.getMonth() + 1) + "." + (date.getYear() + 1900) + "  " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
+        String dateStr = String.valueOf(date.getDate() + "." + (date.getMonth() + 1) + "." + (date.getYear() + 1900) +
+                "  " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
         notifyOfUpdateObserverChat("(" + dateStr + ") " + msg.getNameSender() + ": " + msg.getMessage());
     }
 
@@ -98,10 +101,24 @@ public class ModelMainWindow extends ObservableChat {
         notifyOfSetObserverMember(String.valueOf(allMemberStr));
     }
 
+    public void loadFirstMessagesToChat(BufferMessages messagesList) {
+        listFirstMessages.clear();
+        listFirstMessages = messagesList.getMessageList();
+        for (Message msg : listFirstMessages) {
+            addAMassageToChat(msg);
+        }
+    }
+
     public void sendRequest() {
         ListUsers listUsers = new ListUsers();
         listUsers.setTypeCommand(Constants.COMMAND_LIST_USERS);
         writeMsg.sender(listUsers);
+    }
+
+    public void sendMessagesRequest() {
+        BufferMessages bufferMessages = new BufferMessages();
+        bufferMessages.setTypeCommand(Constants.COMMAND_FIRST_MESSAGES);
+        writeMsg.sender(bufferMessages);
     }
 
     public void readAnswer(Answer answer) {

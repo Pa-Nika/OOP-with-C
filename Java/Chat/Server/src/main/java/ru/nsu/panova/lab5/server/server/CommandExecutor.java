@@ -1,20 +1,21 @@
 package ru.nsu.panova.lab5.server.server;
 
 import com.google.gson.Gson;
-import ru.nsu.panova.lab5.server.server.Exeption.FabricExceptions;
+import ru.nsu.panova.lab5.server.server.Exeption.FactoryExceptions;
 import ru.nsu.panova.lab5.server.server.Command.*;
 
+import java.text.CompactNumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommandExecutor {
-    private final FactoryServerCommand fabricCommand = new FactoryServerCommand();
+    private final FactoryServerCommand factoryCommand = new FactoryServerCommand();
     private СommunicatorForClients communicator;
 
     public CommandExecutor() {
         try {
-            fabricCommand.configurateFabric();
-        } catch (FabricExceptions e) {
+            factoryCommand.configurateFactory();
+        } catch (FactoryExceptions e) {
             System.out.println(e.getMessage());
         }
     }
@@ -45,7 +46,7 @@ public class CommandExecutor {
 
     public void jsonAdapter(String json) {
         Gson gson = new Gson();
-        fabricCommand.getCommand(gson.fromJson(json, CommandReader.class).getTypeCommand()).runCommand(this, json);
+        factoryCommand.getCommand(gson.fromJson(json, CommandReader.class).getTypeCommand()).runCommand(this, json);
     }
 
     public void otherClientConnect(UserLogin userLogin) {
@@ -58,6 +59,34 @@ public class CommandExecutor {
         communicator.sendSpecificClient(answer);
 
         communicator.sendAll(msg);
+
+
+        ////////////////
+        Server.addMessage(msg);
+
+
+
+    }
+
+//    //TODO: aaaaaaaaaaaaaaaaaaaaaaaaaaa
+//    public void fillServerMessageList() {
+//        String firstMessages = String.valueOf(Server.messageList);
+//        if (firstMessages.length() != 10) {
+//
+//        }
+//
+//
+//    }
+
+    public void sendFirstMessages() {
+        List<Message> messages = new ArrayList<>();
+        BufferMessages bufferMessages = new BufferMessages();
+        for (Message msg : Server.messageList) {
+            messages.add(msg);
+        }
+
+        bufferMessages.setBufferMessages(messages);
+        communicator.sendSpecificClient(bufferMessages);
     }
 
     public void otherClientDisconnect(UserLogout userLogout) {
@@ -72,6 +101,14 @@ public class CommandExecutor {
         }
         listUsers.setListUsers(listsName);
         communicator.sendSpecificClient(listUsers);
+    }
+
+
+
+    public void sendListMessages() {
+        BufferMessages bufferMessages = new BufferMessages();
+        List<String> listMessages = new ArrayList<>();
+
     }
 
 }
