@@ -1,0 +1,7 @@
+message ru.nsu.panova.lab5.server.server.Command.Message
+listUsers ru.nsu.panova.lab5.server.server.Command.ListUsers
+login ru.nsu.panova.lab5.server.server.Command.Login
+logout ru.nsu.panova.lab5.server.server.Command.Logout
+userLogin ru.nsu.panova.lab5.server.server.Command.UserLogin
+userLogout ru.nsu.panova.lab5.server.server.Command.UserLogout
+answer ru.nsu.panova.lab5.server.server.Command.Answer
