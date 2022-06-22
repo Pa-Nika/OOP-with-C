@@ -4,13 +4,12 @@ import com.google.gson.Gson;
 import ru.nsu.panova.lab5.server.server.Exeption.FactoryExceptions;
 import ru.nsu.panova.lab5.server.server.Command.*;
 
-import java.text.CompactNumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommandExecutor {
     private final FactoryServerCommand factoryCommand = new FactoryServerCommand();
-    private СommunicatorForClients communicator;
+    private CommunicatorForClients communicator;
 
     public CommandExecutor() {
         try {
@@ -20,7 +19,7 @@ public class CommandExecutor {
         }
     }
 
-    public void setCommunicator(СommunicatorForClients communicator) {
+    public void setCommunicator(CommunicatorForClients communicator) {
         this.communicator = communicator;
     }
 
@@ -60,23 +59,9 @@ public class CommandExecutor {
 
         communicator.sendAll(msg);
 
-
-        ////////////////
         Server.addMessage(msg);
 
-
-
     }
-
-//    //TODO: aaaaaaaaaaaaaaaaaaaaaaaaaaa
-//    public void fillServerMessageList() {
-//        String firstMessages = String.valueOf(Server.messageList);
-//        if (firstMessages.length() != 10) {
-//
-//        }
-//
-//
-//    }
 
     public void sendFirstMessages() {
         List<Message> messages = new ArrayList<>();
@@ -96,19 +81,10 @@ public class CommandExecutor {
     public void sendListUsers() {
         ListUsers listUsers = new ListUsers();
         List<String> listsName = new ArrayList<>();
-        for (СommunicatorForClients vr : Server.serverList) {
+        for (CommunicatorForClients vr : Server.serverList) {
             listsName.add(vr.getUserName());
         }
         listUsers.setListUsers(listsName);
         communicator.sendSpecificClient(listUsers);
     }
-
-
-
-    public void sendListMessages() {
-        BufferMessages bufferMessages = new BufferMessages();
-        List<String> listMessages = new ArrayList<>();
-
-    }
-
 }

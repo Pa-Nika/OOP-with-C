@@ -8,7 +8,6 @@ import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 
-
 public class WriteMsg {
     private BufferedWriter senderInServer;
     private final ModelMainWindow modelMainWindow;
@@ -21,7 +20,6 @@ public class WriteMsg {
             System.out.println(e.getMessage());
         }
     }
-
 
     public void sender(CommandInterface command) {
         Gson gson = new Gson();
@@ -39,8 +37,24 @@ public class WriteMsg {
         }
     }
 
-
     public void closeBuffer() throws IOException {
         senderInServer.close();
+    }
+
+    public void setClientSocket(Socket socket) {
+        try {
+            closeBuffer();
+            senderInServer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void loginWithNewSocket() {
+        modelMainWindow.login();
+    }
+
+    public void requestWithNewSocket() {
+        modelMainWindow.sendRequest();
     }
 }

@@ -155,4 +155,11 @@ public class ModelMainWindow extends ObservableChat {
     public void loadEntranceWindow() {
         Client.setNewLoader(new LoaderEntranceWindow());
     }
+
+    public void setClientSocket(Socket socket) {
+        clientSocket = socket;
+        writeMsg.setClientSocket(socket);
+        writeMsg.loginWithNewSocket();
+        writeMsg.requestWithNewSocket();
+    }
 }

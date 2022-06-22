@@ -14,8 +14,8 @@ public class FactoryClientCommand {
     private final Map<String, CommandInterface> commandMap = new HashMap<>();
 
     public void configureFactory() throws FactoryExceptions {
-        try (BufferedReader reader = new BufferedReader(new FileReader(Constants.FABRIC_CONFIGURATION_FILE_NAME))){
-            Pattern pattern = Pattern.compile(Constants.REGEX_FOR_CONFIGURATION_FABRIC);
+        try (BufferedReader reader = new BufferedReader(new FileReader(Constants.FACTORY_CONFIGURATION_FILE_NAME))){
+            Pattern pattern = Pattern.compile(Constants.REGEX_FOR_CONFIGURATION_FACTORY);
             String str = reader.readLine();
             while (str != null) {
                 Matcher matcher = pattern.matcher(str);
@@ -28,15 +28,15 @@ public class FactoryClientCommand {
                         commandMap.put(workerKey, command);
                         str = reader.readLine();
                     } else {
-                        throw (new FactoryExceptions(Constants.EXCEPTION_FABRIC_CONFIGURATION_FILE));
+                        throw (new FactoryExceptions(Constants.EXCEPTION_FACTORY_CONFIGURATION_FILE));
                     }
                 } else {
-                    throw (new FactoryExceptions(Constants.EXCEPTION_FABRIC_CONFIGURATION_FILE));
+                    throw (new FactoryExceptions(Constants.EXCEPTION_FACTORY_CONFIGURATION_FILE));
                 }
             }
         } catch (Throwable e) {
             e.printStackTrace();
-            throw (new FactoryExceptions(Constants.EXCEPTION_FABRIC_CONFIGURATION_FILE));
+            throw (new FactoryExceptions(Constants.EXCEPTION_FACTORY_CONFIGURATION_FILE));
         }
     }
 

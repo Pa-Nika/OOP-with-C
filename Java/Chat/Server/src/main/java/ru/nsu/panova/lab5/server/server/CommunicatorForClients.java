@@ -6,7 +6,7 @@ import ru.nsu.panova.lab5.server.server.Command.CommandInterface;
 import java.io.*;
 import java.net.Socket;
 
-public class СommunicatorForClients extends Thread {
+public class CommunicatorForClients extends Thread {
     private final BufferedReader in;
     private final BufferedWriter out;
     private final CommandExecutor commandExecutor;
@@ -19,16 +19,13 @@ public class СommunicatorForClients extends Thread {
     }
 
 
-    public СommunicatorForClients(Socket socket, CommandExecutor commandExecutor) throws IOException {
+    public CommunicatorForClients(Socket socket, CommandExecutor commandExecutor) throws IOException {
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//        socket.getInputStream().available();
         out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         this.commandExecutor = commandExecutor;
         commandExecutor.setCommunicator(this);
         start();
     }
-
-    ////////////////////////////////////////////////////////////
 
     @Override
     public void run() {
@@ -40,7 +37,7 @@ public class СommunicatorForClients extends Thread {
                     commandExecutor.jsonAdapter(command);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -51,7 +48,7 @@ public class СommunicatorForClients extends Thread {
             out.write(msg + "\n");
             out.flush();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -60,7 +57,7 @@ public class СommunicatorForClients extends Thread {
         Gson gson = new Gson();
         String json = gson.toJson(command);
 
-        for (СommunicatorForClients vr : Server.serverList) {
+        for (CommunicatorForClients vr : Server.serverList) {
             vr.send(json);
 
         }
@@ -75,7 +72,7 @@ public class СommunicatorForClients extends Thread {
     public void sendEveryoneExceptMyself (CommandInterface command) {
         Gson gson = new Gson();
         String json = gson.toJson(command);
-        for (СommunicatorForClients vr : Server.serverList) {
+        for (CommunicatorForClients vr : Server.serverList) {
             if (!vr.getUserName().equals(this.userName))
                 vr.send(json);
         }

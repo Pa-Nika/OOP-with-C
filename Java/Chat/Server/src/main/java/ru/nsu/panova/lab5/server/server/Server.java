@@ -13,7 +13,7 @@ import static ru.nsu.panova.lab5.server.server.Constants.BUFFER_SIZE;
 public class Server {
 
     public static final int PORT = 11111;
-    public static List<СommunicatorForClients> serverList = new ArrayList<>();
+    public static List<CommunicatorForClients> serverList = new ArrayList<>();
     public static List<Message> messageList = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
@@ -21,8 +21,9 @@ public class Server {
         try {
             while (true) {
                 Socket socket = server.accept();
+                System.out.println("CONNECT");
                 try {
-                    serverList.add(new СommunicatorForClients(socket, new CommandExecutor()));
+                    serverList.add(new CommunicatorForClients(socket, new CommandExecutor()));
                 } catch (IOException e) {
                     socket.close();
                 }
@@ -32,7 +33,7 @@ public class Server {
         }
     }
 
-    public static void delMember(СommunicatorForClients communicatorDell) {
+    public static void delMember(CommunicatorForClients communicatorDell) {
         serverList.remove(communicatorDell);
         if (serverList.isEmpty()) {
             messageList.clear();

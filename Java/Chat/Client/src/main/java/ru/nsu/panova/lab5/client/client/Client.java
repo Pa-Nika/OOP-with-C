@@ -20,14 +20,11 @@ public class Client extends Application {
         try {
             interfaceLoaders.start(stage);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
-
 
     public static void main(String[] args) {
         Application.launch();
     }
 }
-
-//TODO Сделать буфер и корректное отсоединение пользователя

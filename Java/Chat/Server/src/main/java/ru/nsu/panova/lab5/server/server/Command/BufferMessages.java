@@ -1,13 +1,12 @@
 package ru.nsu.panova.lab5.server.server.Command;
 
-import com.google.gson.Gson;
 import ru.nsu.panova.lab5.server.server.CommandExecutor;
 import ru.nsu.panova.lab5.server.server.Constants;
 
 import java.util.List;
 
 public class BufferMessages extends CommandGetterType {
-    private List<Message> FirstMessages;
+    private List<Message> firstMessages;
 
     public BufferMessages() {
 
@@ -15,11 +14,11 @@ public class BufferMessages extends CommandGetterType {
 
     public void setBufferMessages(List<Message> messages) {
         setTypeCommand(Constants.COMMAND_FIRST_MESSAGES);
-        FirstMessages = messages;
+        firstMessages = messages;
     }
 
     public List<Message> getFirstMessages() {
-        return FirstMessages;
+        return firstMessages;
     }
 
     @Override

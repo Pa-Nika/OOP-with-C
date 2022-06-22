@@ -6,7 +6,7 @@ import ru.nsu.panova.lab5.client.client.mainWindow.ModelMainWindow;
 import java.util.List;
 
 public class BufferMessages extends Message {
-    private List<Message> FirstMessages;
+    private List<Message> firstMessages;
 
     public BufferMessages() {
 
@@ -14,11 +14,11 @@ public class BufferMessages extends Message {
 
     public void setMessageBuffer(String typeCommand, List<Message> messages) {
         setTypeCommand(typeCommand);
-        FirstMessages = messages;
+        firstMessages = messages;
     }
 
     public List<Message> getMessageList() {
-        return FirstMessages;
+        return firstMessages;
     }
 
 
